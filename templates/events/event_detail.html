@@ -1,8 +1,7 @@
- { % extends "base.html" %}
+{% extends "base.html%}
+    {% block title %}Events{% endblock %}
 
-    { % block title %}Events{% endblock %}
-
-    { % block content %}    
+    {% block content %}    
             <h1>Events</h1>
 
             {% comment %} Preferred: simple `{% if events %}` check to avoid iterating twice. {% endcomment %}
@@ -16,6 +15,4 @@
             {% else %}
             <p>No events found. Please check back later or create a new event.</p>
             {% endif %}
-    { % endblock %}
-
-
+    {% endblock %}
