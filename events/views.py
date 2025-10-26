@@ -14,3 +14,13 @@ def detail(request, event_id):
     except Event.DoesNotExist:
         return render(request, 'events/detail.html', {'error_message': 'Event not found.'})
     return render(request, 'events/detail.html', {'event': event})
+
+def create_event(request): 
+    if request.method == 'POST':
+        event_title = request.POST.get('title')
+        if event_title:
+            Event.objects.create(name=event_title)
+            return render(request, 'events/create_event.html', {'success_message': 'Event created successfully!'})
+        else:
+            return render(request, 'events/create_event.html', {'error_message': 'Event name cannot be empty.'})
+    return render(request, 'events/create_event.html')
