@@ -3,16 +3,18 @@ from .models import Event
 from django.views import generic
 
 # Create your views here.
-class IndexView(generic.ListView):
-    template_name = 'events/index.html'
-    context_object_name = 'events'
-    
-    def get_queryset(self):
-        return Event.objects.all()
- 
-class DetailView(generic.DetailView):
-    model = Event
-    template_name = 'events/detail.html'
+def index(request):
+    events = Event.objects.all()
+    # compute a boolean to avoid re-evaluating the queryset inside the template
+    no_events = not events.exists()
+    return render(request, 'events/index.html', {'events': events, 'no_events': no_events})
+
+def detail(request, event_id):
+    try:
+        event = Event.objects.get(pk=event_id)
+    except Event.DoesNotExist:
+        return render(request, 'events/event_detail.html', {'error_message': 'Event not found.'})
+    return render(request, 'events/event_detail.html', {'event': event})
 
 def create_event(request): 
     if request.method == 'POST':

@@ -1,18 +1,18 @@
-{% extends "base.html%}
+    {% extends 'base.html' %}
+
     {% block title %}Events{% endblock %}
 
     {% block content %}    
             <h1>Events</h1>
-
-            {% comment %} Preferred: simple `{% if events %}` check to avoid iterating twice. {% endcomment %}
-
             {% if events %}
             <ul>
                 {% for event in events %}
-                <li>{{ event.name }}{% if event.date %} — {{ event.date }}{% endif %}</li>
+                <li>{{ event.title}}{% if event.date %} — {{ event.date }}{% endif %}</li>
                 {% endfor %}
             </ul>
             {% else %}
             <p>No events found. Please check back later or create a new event.</p>
             {% endif %}
     {% endblock %}
+
+
