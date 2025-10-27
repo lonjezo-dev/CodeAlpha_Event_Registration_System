@@ -19,4 +19,25 @@
         </div>
         {% endif %}
     </div>
+    
+        {# Messages (success/info) will display here if any view set them #}
+        {% if messages %}
+        <ul class="messages">
+            {% for message in messages %}
+                <li class="message {{ message.tags }}">{{ message }}</li>
+            {% endfor %}
+        </ul>
+        {% endif %}
+
+        {# Registration button/form #}
+        <div class="event-register">
+            {% if user.is_authenticated %}
+                <form action="{% url 'events:register' event.id %}" method="post">
+                    {% csrf_token %}
+                    <button type="submit" class="btn btn-primary">Register for this event</button>
+                </form>
+            {% else %}
+                <p>Please <a href="{% url 'login' %}">log in</a> to register for this event.</p>
+            {% endif %}
+        </div>
 {% endblock %}
