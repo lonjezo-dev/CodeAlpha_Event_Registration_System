@@ -23,6 +23,7 @@ h1.event-heading {
   margin: 30px auto;
   padding: 20px;
   max-width: 700px;
+
 }
 
 /* Individual Event Items */
@@ -31,6 +32,7 @@ h1.event-heading {
   border-bottom: 1px solid #E0E0E0;
   color: #424242;
   font-size: 1.1em;
+    list-style: none;
 }
 
 .event-item:last-child {
@@ -39,6 +41,80 @@ h1.event-heading {
 
 /* Hover Effect */
 .event-item:hover {
-  background-color: #E3F2FD;
+  /* background-color: #E3F2FD; */
   cursor: pointer;
+}
+
+
+/* Event Detail Container */
+.event-detail {
+  background-color: #FFFFFF;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  margin: 40px auto;
+  padding: 30px;
+  max-width: 700px;
+}
+
+/* Event Title */
+.event-title {
+  color: #1E88E5; /* Bright Blue */
+  font-size: 2.2em;
+  text-align: center;
+  margin-bottom: 20px;
+  font-weight: bold;
+}
+
+/* Event Date & Location */
+.event-date,
+.event-location {
+  font-size: 1.1em;
+  margin: 10px 0;
+  padding: 8px 12px;
+  background-color: #F5F5F5;
+  border-left: 10px solid #1E88E5;
+  border-radius: 6px;
+}
+
+/* Event Description Section */
+.event-description {
+  margin-top: 25px;
+  padding: 20px;
+  background-color: #F9FBFC;
+  border-radius: 10px;
+  border: 1px solid #E0E0E0;
+}
+
+.event-description h2 {
+  color: #1E88E5;
+  margin-top: 0;
+  font-size: 1.5em;
+}
+
+.event-description p {
+  line-height: 1.6;
+  font-size: 1.05em;
+  color: #424242;
+}
+
+/* Hover Interaction */
+.event-detail:hover {
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.15);
+  transition: box-shadow 0.3s ease-in-out;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .event-detail {
+    margin: 20px;
+    padding: 20px;
+  }
+
+  .event-title {
+    font-size: 1.8em;
+  }
+
+  .event-description h2 {
+    font-size: 1.3em;
+  }
 }

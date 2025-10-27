@@ -10,11 +10,11 @@
             {% if events %}
             <ul class="event-list">
                 {% for event in events %}
-                <li class="event-item">{{ event.title}}{% if event.date %} — {{ event.date }}{% endif %}</li>
+                <li class="event-item" ><a href="/events/{{ event.id }}/">{{ event.title}}{% if event.date %} — {{ event.date }}{% endif %}</a></li>
                 {% endfor %}
             </ul>
             {% else %}
-            <p>No events found. Please check back later or create a new event.</p>
+            <p>No current events found. Please check back later</p>
             {% endif %}
     {% endblock %}
 
