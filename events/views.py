@@ -1,7 +1,6 @@
 
 from django.shortcuts import render, redirect, get_object_or_404
 from .models import Event, Registration
-from django.views import generic
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.views.decorators.http import require_POST
@@ -34,7 +33,7 @@ def register_event(request, event_id):
     """
     event = get_object_or_404(Event, pk=event_id)
 
-    registration, created = Registration.objects.get_or_create(user=request.user, event=event)
+    created = Registration.objects.get_or_create(user=request.user, event=event)
     if created:
         messages.success(request, 'You have successfully registered for this event.')
     else:

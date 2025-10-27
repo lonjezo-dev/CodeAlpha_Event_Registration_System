@@ -18,9 +18,8 @@
             <p>{{ event.description }}</p>
         </div>
         {% endif %}
-    </div>
-    
-        {# Messages (success/info) will display here if any view set them #}
+        
+        {# Messages (success/info) will display here if any view set them - scoped inside the card #}
         {% if messages %}
         <ul class="messages">
             {% for message in messages %}
@@ -40,4 +39,5 @@
                 <p>Please <a href="{% url 'login' %}">log in</a> to register for this event.</p>
             {% endif %}
         </div>
+    </div>
 {% endblock %}
