@@ -1,13 +1,16 @@
     {% extends 'base.html' %}
 
+    {% load static %}
+
     {% block title %}Events{% endblock %}
 
     {% block content %}    
-            <h1>Events</h1>
+      <link rel="stylesheet" href="{% static 'events/style.css' %}">
+            <h1 class="event-heading">Events</h1>
             {% if events %}
-            <ul>
+            <ul class="event-list">
                 {% for event in events %}
-                <li>{{ event.title}}{% if event.date %} — {{ event.date }}{% endif %}</li>
+                <li class="event-item">{{ event.title}}{% if event.date %} — {{ event.date }}{% endif %}</li>
                 {% endfor %}
             </ul>
             {% else %}
