@@ -22,6 +22,8 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = 'django-insecure-_-w3k94b*!e8!@*j1&^y%v95mmpf*p2q6qu)bztg-p*%rsk)xq'
 
+AUTH_USER_MODEL = 'accounts.CustomUser'
+
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
@@ -32,6 +34,7 @@ ALLOWED_HOSTS = []
 
 INSTALLED_APPS = [
     'events',
+    'accounts',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -76,7 +79,7 @@ WSGI_APPLICATION = 'event_registration_system.wsgi.application'
 DATABASES = {
     'default': {
         "ENGINE": "django.db.backends.mysql",
-        "NAME": "event_registration_db",
+        "NAME": "event_registration_system_db",
         'USER': 'sam',
         'PASSWORD': '?Samuel2001@',
         'HOST': 'localhost',
