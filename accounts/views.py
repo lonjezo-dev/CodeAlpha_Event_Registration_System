@@ -15,7 +15,7 @@ def register(request):
                return redirect('login')  # Redirect to the login page
        else:
            form = CustomUserCreationForm()
-       return render(request, 'registration/register.html', {'form': form})
+       return render(request, 'accounts/register.html', {'form': form})
 
 
 def user_login(request):
@@ -30,5 +30,5 @@ def user_login(request):
                    return redirect('index')  # Redirect to a home page or dashboard
        else:
            form = AuthenticationForm()
-       return render(request, 'registration/login.html', {'form': form})
+       return render(request, 'accounts/login.html', {'form': form})
    
