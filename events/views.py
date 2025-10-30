@@ -12,7 +12,20 @@ def index(request):
     events = Event.objects.all()
     # compute a boolean to avoid re-evaluating the queryset inside the template
     no_events = not events.exists()
-    return render(request, 'events/index.html', {'events': events, 'no_events': no_events})
+
+    # get logged in user 
+    user = request.user
+
+    # get user's registrations
+    user_registrations = Registration.objects.filter(user=user).select_related('event')
+
+    context ={
+        'user': user,
+        'events': events,
+        'no_events': no_events,
+        'user_registrations': user_registrations,
+    }
+    return render(request, 'events/index.html', context)
 
 
 def detail(request, event_id):
@@ -37,8 +50,10 @@ def register_event(request, event_id):
     created = Registration.objects.get_or_create(user=request.user, event=event)
     if created:
         messages.success(request, 'You have successfully registered for this event.')
+        # return redirect('events:index')
     else:
         messages.info(request, 'You are already registered for this event.')
+        
 
     # Redirect back to the event detail page using the app namespace
     try:

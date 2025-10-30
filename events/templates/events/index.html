@@ -6,8 +6,11 @@
 
     {% block content %}    
       <link rel="stylesheet" href="{% static 'events/style.css' %}">
-          <h2 class="welcome">🎉 Hello, {{ user.name|default:user.username }}!</h2>
-          <p>Welcome to the Event Registration System.</p>
+         <div style="display: flex; justify-content: space-between; align-items: center;">
+             <h2>Welcome, {{ user.name|default:user.username }}!</h2>
+             <a href="{% url 'accounts:logout' %}" style="color: red;">Logout</a>
+         </div>
+
           <hr>
 
          {% if no_events %}
