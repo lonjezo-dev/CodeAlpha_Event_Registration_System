@@ -6,16 +6,37 @@
 
     {% block content %}    
       <link rel="stylesheet" href="{% static 'events/style.css' %}">
-            <h1 class="event-heading">Events</h1>
-            {% if events %}
-            <ul class="event-list">
-                {% for event in events %}
-                <li class="event-item" ><a href="/{{ event.id }}/">{{ event.title}}{% if event.date %} — {{ event.date }}{% endif %}</a></li>
-                {% endfor %}
-            </ul>
+          <h2 class="welcome">🎉 Hello, {{ user.name|default:user.username }}!</h2>
+          <p>Welcome to the Event Registration System.</p>
+          <hr>
+
+         {% if no_events %}
+        <p>No events available at the moment.</p>
+       {% else %}
+        <h3>Available Events</h3>
+        <ul>
+            {% for event in events %}
+                <li>
+                    <strong>{{ event.title }}</strong> - {{ event.date }}
+                    <form method="post" action="{% url 'events:register' event.id %}">
+                        {% csrf_token %}
+                        <button type="submit">Register</button>
+                    </form>
+                </li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+
+    <hr>
+    <h3>Your Registered Events</h3>
+            {% if user_registrations %}
+                <ul>
+                    {% for reg in user_registrations %}
+                        <li>{{ reg.event.title }} ({{ reg.event.date }})</li>
+                    {% endfor %}
+                </ul>
             {% else %}
-            <p>No current events found. Please check back later</p>
+                <p>You haven’t registered for any events yet.</p>
             {% endif %}
     {% endblock %}
-
 
