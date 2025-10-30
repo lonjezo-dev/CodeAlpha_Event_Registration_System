@@ -7,6 +7,7 @@ from django.views.decorators.http import require_POST
 
 
 # Create your views here.
+@login_required(login_url='accounts:login')
 def index(request):
     events = Event.objects.all()
     # compute a boolean to avoid re-evaluating the queryset inside the template
@@ -22,7 +23,7 @@ def detail(request, event_id):
     return render(request, 'events/event_detail.html', {'event': event})
 
 
-@login_required
+@login_required(login_url='accounts:login')
 @require_POST
 def register_event(request, event_id):
     """Register the current authenticated user for the given event.

@@ -10,7 +10,7 @@
             {% if events %}
             <ul class="event-list">
                 {% for event in events %}
-                <li class="event-item" ><a href="/events/{{ event.id }}/">{{ event.title}}{% if event.date %} — {{ event.date }}{% endif %}</a></li>
+                <li class="event-item" ><a href="/{{ event.id }}/">{{ event.title}}{% if event.date %} — {{ event.date }}{% endif %}</a></li>
                 {% endfor %}
             </ul>
             {% else %}
