@@ -35,7 +35,12 @@
             {% if user_registrations %}
                 <ul>
                     {% for reg in user_registrations %}
-                        <li>{{ reg.event.title }} ({{ reg.event.date }})</li>
+                        <li>{{ reg.event.title }} ({{ reg.event.date }})
+                            <form method="post" action="{% url 'events:cancel' reg.event.id %}">
+                            {% csrf_token %}
+                            <button type="submit">Cancel</button>
+                            </form>
+                      </li>  
                     {% endfor %}
                 </ul>
             {% else %}
