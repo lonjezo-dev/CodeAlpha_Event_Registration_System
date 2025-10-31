@@ -6,7 +6,7 @@
 
     {% block content %}    
       <link rel="stylesheet" href="{% static 'events/style.css' %}">
-         <div style="display: flex; justify-content: space-between; align-items: center;">
+         <div style="display: flex; justify-content: space-evenly; align-items: center;">
              <h2>Welcome, {{ user.name|default:user.username }}!</h2>
              <a href="{% url 'accounts:logout' %}" style="color: red;">Logout</a>
          </div>
@@ -21,9 +21,9 @@
             {% for event in events %}
                 <li>
                     <strong>{{ event.title }}</strong> - {{ event.date }}
-                    <form method="post" action="{% url 'events:register' event.id %}">
+                    <form method="post" action="{% url 'events:detail' event.id %}">
                         {% csrf_token %}
-                        <button type="submit">Register</button>
+                        <button type="submit">View more</button>
                     </form>
                 </li>
             {% endfor %}
