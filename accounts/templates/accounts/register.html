@@ -3,22 +3,102 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Register</title>
+    <title>Create Account</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <h1>Register</h1>
-        {% if messages %}
-        {% for message in messages %}
-        <div class="alert alert-{{ message.tags }}">
-        {{ message }}
+    <div class="register-container">
+        <div class="register-header">
+            <h1>Create Account</h1>
         </div>
-        {% endfor %}
-        {% endif %}
+        
+        <form class="register-form" method="post">
+            {% csrf_token %}
+            
+            <!-- Django Messages -->
+            {% if messages %}
+                {% for message in messages %}
+                    <div class="alert alert-{{ message.tags }}">
+                        {{ message }}
+                    </div>
+                {% endfor %}
+            {% endif %}
+            
+            <!-- Non-field errors -->
+            {% if form.non_field_errors %}
+                <ul class="errorlist">
+                    {% for error in form.non_field_errors %}
+                        <li>{{ error }}</li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
+            
+            <!-- Name Field -->
+            <div class="form-group">
+                <label for="id_name">Full Name</label>
+                <input type="text" name="name" id="id_name" class="form-control" placeholder="Enter your full name" value="{{ form.name.value|default_if_none:'' }}">
+                {% if form.name.errors %}
+                    <div class="field-error">{{ form.name.errors }}</div>
+                {% endif %}
+            </div>
+            
+            <!-- Username Field -->
+            <div class="form-group">
+                <label for="id_username">Username</label>
+                <input type="text" name="username" id="id_username" class="form-control" placeholder="Choose a username" value="{{ form.username.value|default_if_none:'' }}">
+                <div class="form-requirements">Required. 150 characters or fewer. Letters, digits and @/./+/-/_ only.</div>
+                {% if form.username.errors %}
+                    <div class="field-error">{{ form.username.errors }}</div>
+                {% endif %}
+            </div>
+            
+            <!-- Email Field -->
+            <div class="form-group">
+                <label for="id_email">Email Address</label>
+                <input type="email" name="email" id="id_email" class="form-control" placeholder="Enter your email address" value="{{ form.email.value|default_if_none:'' }}">
+                {% if form.email.errors %}
+                    <div class="field-error">{{ form.email.errors }}</div>
+                {% endif %}
+            </div>
+            
+            <!-- Password Requirements -->
+            <div class="password-requirements">
+                <h4>Password Requirements</h4>
+                <ul>
+                    <li>Your password can't be too similar to your other personal information</li>
+                    <li>Your password must contain at least 8 characters</li>
+                    <li>Your password can't be a commonly used password</li>
+                    <li>Your password can't be entirely numeric</li>
+                </ul>
+            </div>
+            
+            <!-- Password Field -->
+            <div class="form-group">
+                <label for="id_password1">Password</label>
+                <input type="password" name="password1" id="id_password1" class="form-control" placeholder="Create a password">
+                {% if form.password1.errors %}
+                    <div class="field-error">{{ form.password1.errors }}</div>
+                {% endif %}
+            </div>
+            
+            <!-- Password Confirmation Field -->
+            <div class="form-group">
+                <label for="id_password2">Password Confirmation</label>
+                <input type="password" name="password2" id="id_password2" class="form-control" placeholder="Confirm your password">
+                <div class="form-requirements">Enter the same password as before, for verification.</div>
+                {% if form.password2.errors %}
+                    <div class="field-error">{{ form.password2.errors }}</div>
+                {% endif %}
+            </div>
+            
+            <button type="submit" class="btn-register">Create Account</button>
+            
+            <div class="login-link">
+                Already have an account? <a href="{% url 'accounts:login' %}">Sign In</a>
+            </div>
+        </form>
+    </div>
 
-    <form method="post">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit">Register</button>
-    </form>
+    <script src="script.js"></script>
 </body>
 </html>

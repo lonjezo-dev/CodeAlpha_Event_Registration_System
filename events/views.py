@@ -49,7 +49,7 @@ def register_event(request, event_id):
 
     created = Registration.objects.get_or_create(user=request.user, event=event)
     if created:
-        messages.success(request, 'You have successfully registered for this event.')
+        # messages.success(request, 'You have successfully registered for this event.')
         return redirect('events:index')
     else:
         messages.info(request, 'You are already registered for this event.')
@@ -70,7 +70,7 @@ def cancel(request, event_id):
     try:
         registration= Registration.objects.get(user=request.user, event_id=event_id)
         registration.delete()
-        messages.success(request, "You have successfully cancelled your registration.")
+        # messages.success(request, "You have successfully cancelled your registration.")
     except Registration.DoesNotExist:
         messages.warning(request, "You were not registered for this event.")
 
